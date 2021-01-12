@@ -1,1 +1,13 @@
-# Twitter-API-ETL
+# Data Wrangling & Analysis with DogRate Tweets
+
+## Dataset
+
+We have 3 datasets. The first is the tweet archive of the Twitter @dog_Rates, also known for WeRateDogs, which is a twitter account that rates peoples' dogs with humerous comment about the dog. The ratings are out of 10. However, it can gobeyond that. The dataset contains basic tweet data (tweet ID, timestamp, text, and etc) for over 5000 tweets. The second contains tweet image predictions of the dog's breed or other objects using convolutional neural network. The file is hosted on the servers and the url is https://d17h27t6h515a5.cloudfront.net/topher/2017/August/599fd2ad_image-predictions/image-predictions.tsv. There are 2075 entries each associated with tweet_id, image jpg_url, img_num, top 3 predictions and its confidences. The third dataset is from twitter API,tweepy, that contains the data about retweets information such as tweet_id, favorites, number of user followers, user favorites and date time. 
+
+## Summary of Findings
+
+We are interested in predicting the number of favorites of the tweet. We want to examine the features that are correlated with the favorites feature. We found the the number of retweets have a strong correlation (pearson correlation of 0.86). Most of the retweets are between 0-10000 and favorites are between 0-50000. We engineered a feature called tweet length and found out that there is a slight correlation (0.19) between the tweet length and the favorites. However, the most common tweet length is 25 words. Because of the imbalanced of the class, it could cause the correlation to be lower than expected. We also engineered another feature called "gender" and it was found that gender of the dogs seems to have no correlation with the number of favorites. After removing features that are not important from the model, Ridge Regression model was chosen to perform a prediction and the r2 score for Ridge Regression obtained was 0.83 on the test dataset.
+
+## Key Insights
+
+We used the model define-code-test to wrangle and analyze our data. We identified wrangling projects we need to do and perform the code and do a test to see whether those steps work out as expected. The timestamp columns were converted to the datetime data structure. The text is normalized through NLP library (nltk). The data the image prediction were arranged so that we obtain only the dog's breed prediction with the preferred most confidence prediction. The dataset needed to be merged in order to perform modeling and data exploration. I would like to thank Twitter for providing the data and developer access to the API.
